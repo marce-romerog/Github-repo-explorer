@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "GitHub Organization Explorer",
   description: "Browse public repositories for any GitHub organization.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
