@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 type Props = {
   error: Error & { digest?: string };
-  reset: () => void;
 };
 
-export default function OrgError({ error, reset }: Props) {
+export default function OrgError({ error }: Props) {
+  const router = useRouter();
+
   useEffect(() => {
     console.error(error);
   }, [error]);
@@ -22,7 +24,7 @@ export default function OrgError({ error, reset }: Props) {
         exist or the GitHub API may be unavailable.
       </p>
       <button
-        onClick={reset}
+        onClick={() => router.push("/")}
         className="mt-6 bg-gray-900 text-white text-sm px-4 py-2 rounded hover:bg-gray-700"
       >
         Try again
