@@ -3,7 +3,11 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function SearchForm() {
+type Props = {
+  autoFocus?: boolean;
+};
+
+export default function SearchForm({ autoFocus = false }: Props) {
   const router = useRouter();
   const [value, setValue] = useState("");
 
@@ -21,6 +25,7 @@ export default function SearchForm() {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="e.g. vercel"
+        autoFocus={autoFocus}
         className="border border-gray-300 rounded px-3 py-2 text-sm w-64 focus:outline-none focus:ring-2 focus:ring-gray-400"
       />
       <button

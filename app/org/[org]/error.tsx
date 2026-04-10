@@ -26,17 +26,17 @@ export default function OrgError({ error }: Props) {
       </h1>
       <p className="mt-2 text-gray-500">
         {error.message === "NOT_FOUND"
-          ? "This organization doesn't exist on GitHub. Check for typos and try again."
+          ? "We couldn't find an organization with that name. It may have been deleted, made private, or the name might be misspelled. Would you like to try searching for another one?"
           : error.message === "RATE_LIMITED"
-          ? "Too many requests to the GitHub API. Please wait a moment and try again."
-          : "Unable to load repositories. The GitHub API may be unavailable."}
+          ? "GitHub's API rate limit has been reached. Please wait a moment before trying again."
+          : "Something went wrong while loading repositories. Please try again."}
       </p>
 
       <div className="mt-6">
         <p className="text-sm text-gray-600 mb-2">
           Search for a different organization:
         </p>
-        <SearchForm />
+        <SearchForm autoFocus />
       </div>
 
       <button

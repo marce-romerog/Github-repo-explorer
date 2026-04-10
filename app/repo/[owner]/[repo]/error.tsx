@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -10,9 +10,11 @@ type Props = {
 
 export default function RepoError({ error, reset }: Props) {
   const router = useRouter();
+  const retryRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     console.error(error);
+    retryRef.current?.focus();
   }, [error]);
 
   return (
@@ -26,21 +28,22 @@ export default function RepoError({ error, reset }: Props) {
       </h1>
       <p className="mt-2 text-gray-500">
         {error.message === "NOT_FOUND"
-          ? "This repository doesn't exist. It may have been deleted or made private."
+          ? "We couldn't find a repository with that name. It may have been deleted, made private, or the name might be misspelled. Would you like to try searching for another one?"
           : error.message === "RATE_LIMITED"
-          ? "Too many requests to the GitHub API. Please wait a moment and try again."
-          : "Unable to load this repository. The GitHub API may be unavailable."}
+          ? "GitHub's API rate limit has been reached. Please wait a moment before trying again."
+          : "Something went wrong while loading this repository. Please try again."}
       </p>
       <div className="flex gap-3 mt-6">
         <button
+          ref={retryRef}
           onClick={reset}
-          className="bg-gray-900 text-white text-sm px-4 py-2 rounded hover:bg-gray-700"
+          className="bg-gray-900 text-white text-sm px-4 py-2 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400"
         >
           Try again
         </button>
         <button
           onClick={() => router.push("/")}
-          className="border border-gray-300 text-gray-700 text-sm px-4 py-2 rounded hover:bg-gray-50"
+          className="border border-gray-300 text-gray-700 text-sm px-4 py-2 rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300"
         >
           Back to Search
         </button>
