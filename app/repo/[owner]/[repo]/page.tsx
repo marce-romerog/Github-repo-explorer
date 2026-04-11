@@ -21,12 +21,15 @@ export default async function RepoPage({ params }: Props) {
 
   return (
     <main className="max-w-2xl mx-auto py-12 px-4">
-      <Link
-        href={`/org/${owner}`}
-        className="text-sm text-gray-400 hover:text-gray-600 transition-colors"
-      >
-        ← {owner}
-      </Link>
+      <nav className="flex items-center gap-1 text-sm text-gray-400">
+        <Link href="/" className="hover:text-gray-600 transition-colors">
+          ← Search
+        </Link>
+        <span>›</span>
+        <Link href={`/org/${owner}`} className="hover:text-gray-600 transition-colors">
+          {owner}
+        </Link>
+      </nav>
 
       <div className="mt-4 flex items-start justify-between gap-4">
         <h1 className="text-2xl font-semibold tracking-tight">{repoData.name}</h1>
